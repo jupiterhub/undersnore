@@ -32,17 +32,17 @@ class _AudioRecorderState extends State<AudioRecorder> {
   void _startTimer() {
     _timer?.cancel();
 
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         _recordDurationInSeconds++;
       });
     });
   }
 
-  Future<void> start() async {
+  Future<void> start(String? path) async {
     try {
       if (await _audioRecorder.hasPermission()) {
-        await _audioRecorder.start();
+        await _audioRecorder.start(path: path);
 
         bool isRecording = await _audioRecorder.isRecording();
         setState(() {
