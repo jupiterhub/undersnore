@@ -1,0 +1,1 @@
+enum Codec { aac, ogg, pcm16, pcmWave, mp4}
