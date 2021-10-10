@@ -4,14 +4,15 @@ import 'package:undersnore/player/player_interface.dart';
 class AudioPlayer extends StatefulWidget {
   const AudioPlayer({Key? key, required this.audioPlayer}) : super(key: key);
 
-  final Player audioPlayer;
+  final UndersnorePlayer audioPlayer;
 
   @override
   _AudioPlayerState createState() => _AudioPlayerState();
 
 }
 
-class _AudioPlayerState extends State<AudioPlayer> implements Player {
+class _AudioPlayerState extends State<AudioPlayer> implements UndersnorePlayer {
+  bool _playerInitialized = false;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class _AudioPlayerState extends State<AudioPlayer> implements Player {
   @override
   void initState() {
     super.initState();
-    initialize();
+    initialize().then((value) => _playerInitialized = true);
   }
 
   @override
@@ -56,8 +57,8 @@ class _AudioPlayerState extends State<AudioPlayer> implements Player {
   }
 
   @override
-  void initialize() {
-    widget.audioPlayer.initialize();
+  Future initialize() {
+    return widget.audioPlayer.initialize();
   }
 
   @override

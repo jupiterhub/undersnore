@@ -1,5 +1,5 @@
-abstract class Player {
-  void initialize();
+abstract class UndersnorePlayer {
+  Future initialize();
   void finalize();
 
   void play(String? path);
