@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:record/record.dart';
+import 'package:undersnore/recorder/recorder.dart';
 
 class AudioRecorder extends StatefulWidget {
   final void Function(String? path) onStop;
@@ -12,7 +13,7 @@ class AudioRecorder extends StatefulWidget {
   _AudioRecorderState createState() => _AudioRecorderState();
 }
 
-class _AudioRecorderState extends State<AudioRecorder> {
+class _AudioRecorderState extends State<AudioRecorder> implements Recorder {
   bool _isRecording = false;
   Timer? _timer;
   int _recordDurationInSeconds = 0;
@@ -39,6 +40,7 @@ class _AudioRecorderState extends State<AudioRecorder> {
     });
   }
 
+  @override
   Future<void> start(String? path) async {
     try {
       if (await _audioRecorder.hasPermission()) {
@@ -58,6 +60,7 @@ class _AudioRecorderState extends State<AudioRecorder> {
     }
   }
 
+  @override
   Future<void> stop() async {
     _timer?.cancel();
     final path = await _audioRecorder.stop();
@@ -69,4 +72,5 @@ class _AudioRecorderState extends State<AudioRecorder> {
 
     _startTimer();
   }
+
 }
