@@ -1,3 +1,7 @@
+
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter_sound/flutter_sound.dart';
 import 'package:flutter_sound/public/flutter_sound_player.dart';
 import 'package:undersnore/player/player_interface.dart';
 
@@ -23,13 +27,18 @@ class AudioPlayerFlutterSound implements UndersnorePlayer {
   }
 
   @override
-  void pause() {
-    // TODO: implement pause
+  void play(String? path, Function? onFinished) {
+    // TODO: identify codec to use based on path
+    _flutterSoundPlayer!.startPlayer(
+      fromURI: path,
+      codec: Codec.mp3,
+      whenFinished: onFinished != null ? onFinished() : null
+    );
   }
 
   @override
-  void play(String? path) {
-    // TODO: implement play
+  void pause() {
+    // TODO: implement pause
   }
 
   @override

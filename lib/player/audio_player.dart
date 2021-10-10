@@ -32,8 +32,8 @@ class _AudioPlayerState extends State<AudioPlayer> implements UndersnorePlayer {
   }
 
   @override
-  void play(String? path) {
-    widget.audioPlayer.play(path);
+  void play(String? path, Function? onFinished) {
+    widget.audioPlayer.play(path, onFinished);
   }
 
   @override
