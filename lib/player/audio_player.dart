@@ -32,8 +32,8 @@ class _AudioPlayerState extends State<AudioPlayer> implements UndersnorePlayer {
   }
 
   @override
-  void play(String? path, Function? onFinished) {
-    widget.audioPlayer.play(path, onFinished);
+  Future<Duration?> play(String? path, Function? onFinished) {
+    return widget.audioPlayer.play(path, onFinished);
   }
 
   @override
@@ -47,18 +47,8 @@ class _AudioPlayerState extends State<AudioPlayer> implements UndersnorePlayer {
   }
 
   @override
-  void stop() {
-    widget.audioPlayer.stop();
-  }
-
-  @override
-  void finalize() {
-    widget.audioPlayer.finalize();
-  }
-
-  @override
-  Future initialize() {
-    return widget.audioPlayer.initialize();
+  Future<String?> stop() {
+    return widget.audioPlayer.stop();
   }
 
   @override
@@ -66,4 +56,14 @@ class _AudioPlayerState extends State<AudioPlayer> implements UndersnorePlayer {
     widget.audioPlayer.pause();
   }
 
+  @override
+  Future initialize() {
+    return widget.audioPlayer.initialize();
+  }
+
+
+  @override
+  Future<void> finalize() {
+    return widget.audioPlayer.finalize();
+  }
 }
