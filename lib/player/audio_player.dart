@@ -8,7 +8,6 @@ class AudioPlayer extends StatefulWidget {
 
   @override
   _AudioPlayerState createState() => _AudioPlayerState();
-
 }
 
 class _AudioPlayerState extends State<AudioPlayer> implements UndersnorePlayer {
@@ -37,13 +36,13 @@ class _AudioPlayerState extends State<AudioPlayer> implements UndersnorePlayer {
   }
 
   @override
-  void seek(Duration duration) {
-    widget.audioPlayer.seek(duration);
+  Future<void> seek(Duration duration) {
+    return widget.audioPlayer.seek(duration);
   }
 
   @override
-  void record() {
-    widget.audioPlayer.record();
+  Future<void> record(String? path) {
+    return widget.audioPlayer.record(path);
   }
 
   @override
@@ -52,15 +51,14 @@ class _AudioPlayerState extends State<AudioPlayer> implements UndersnorePlayer {
   }
 
   @override
-  void pause() {
-    widget.audioPlayer.pause();
+  Future<void> pause() {
+    return widget.audioPlayer.pause();
   }
 
   @override
   Future initialize() {
     return widget.audioPlayer.initialize();
   }
-
 
   @override
   Future<void> finalize() {

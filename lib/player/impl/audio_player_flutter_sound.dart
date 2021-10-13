@@ -4,7 +4,6 @@ import 'package:flutter_sound/public/flutter_sound_player.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:undersnore/player/player_interface.dart';
 
-
 class AudioPlayerFlutterSound implements UndersnorePlayer {
   FlutterSoundPlayer? _flutterSoundPlayer = FlutterSoundPlayer();
   FlutterSoundRecorder? _flutterSoundRecorder = FlutterSoundRecorder();
@@ -49,21 +48,19 @@ class AudioPlayerFlutterSound implements UndersnorePlayer {
   }
 
   @override
-  void record(String? path) {
+  Future<void> record(String? path) {
     // TODO: identify codec to use based on path
-    _flutterSoundRecorder!.startRecorder(toFile: path, codec: Codec.mp3,
-        // audioSource: AudioSource.microphone   // TODO: get audio_source
-    );
+    return _flutterSoundRecorder!.startRecorder(toFile: path, codec: Codec.mp3);
   }
 
   @override
-  void pause() {
-    // TODO: implement pause
+  Future<void> pause() {
+    return _flutterSoundPlayer!.pausePlayer();
   }
 
   @override
-  void seek(Duration duration) {
-    // TODO: implement seek
+  Future<void> seek(Duration duration) {
+    return _flutterSoundPlayer!.seekToPlayer(duration);
   }
 
   @override

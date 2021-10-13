@@ -4,8 +4,8 @@ abstract class UndersnorePlayer {
 
   Future<Duration?> play(String? path, Function? onFinished);
   Future<String?> stop();
-  void record();
+  Future<void> record(String? path);
 
-  void seek(Duration duration);
-  void pause();
+  Future<void> seek(Duration duration);
+  Future<void> pause();
 }
