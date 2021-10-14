@@ -1,4 +1,6 @@
   import 'package:flutter/material.dart';
+import 'package:undersnore/player/audio_player.dart';
+import 'package:undersnore/player/impl/audio_player_flutter_sound.dart';
 
 
 void main() {
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Undersnore Home Page'),
+      home:  AudioPlayer(title: 'Undersnore Home Page', audioPlayer: AudioPlayerFlutterSound()),
     );
   }
 }

@@ -2,66 +2,56 @@ import 'package:flutter/material.dart';
 import 'package:undersnore/player/player_interface.dart';
 
 class AudioPlayer extends StatefulWidget {
-  const AudioPlayer({Key? key, required this.audioPlayer}) : super(key: key);
+  const AudioPlayer({Key? key, required this.audioPlayer,  required this.title}) : super(key: key);
 
   final UndersnorePlayer audioPlayer;
+  final String title;
 
   @override
   _AudioPlayerState createState() => _AudioPlayerState();
 }
 
-class _AudioPlayerState extends State<AudioPlayer> implements UndersnorePlayer {
+class _AudioPlayerState extends State<AudioPlayer> {
   bool _playerInitialized = false;
+  bool _isRecording = false;
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+       title: Text(widget.title)
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            const Text("Press button to record"),
+            Text('Player initialized? $_playerInitialized'),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _record,
+        tooltip: 'Record',
+        child: _isRecording
+            ? const Icon(Icons.record_voice_over)
+            : const Icon(Icons.stop),
+      ),
+    );
   }
 
   @override
   void initState() {
     super.initState();
-    initialize().then((value) => _playerInitialized = true);
+    widget.audioPlayer.initialize().then((value) => _playerInitialized = true);
   }
 
   @override
   void dispose() {
-    finalize();
+    widget.audioPlayer.finalize();
     super.dispose();
   }
 
-  @override
-  Future<Duration?> play(String? path, Function? onFinished) {
-    return widget.audioPlayer.play(path, onFinished);
-  }
-
-  @override
-  Future<void> seek(Duration duration) {
-    return widget.audioPlayer.seek(duration);
-  }
-
-  @override
-  Future<void> record(String? path) {
-    return widget.audioPlayer.record(path);
-  }
-
-  @override
-  Future<String?> stop() {
-    return widget.audioPlayer.stop();
-  }
-
-  @override
-  Future<void> pause() {
-    return widget.audioPlayer.pause();
-  }
-
-  @override
-  Future initialize() {
-    return widget.audioPlayer.initialize();
-  }
-
-  @override
-  Future<void> finalize() {
-    return widget.audioPlayer.finalize();
+  void _record() async{
+    await widget.audioPlayer.record("").then((value) => _isRecording = true);
   }
 }
