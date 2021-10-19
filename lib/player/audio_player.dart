@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:undersnore/player/player_interface.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class AudioPlayer extends StatefulWidget {
   const AudioPlayer({Key? key, required this.audioPlayer,  required this.title}) : super(key: key);
@@ -52,6 +53,6 @@ class _AudioPlayerState extends State<AudioPlayer> {
   }
 
   void _record() async{
-    await widget.audioPlayer.record("").then((value) => _isRecording = true);
+    await widget.audioPlayer.record("sample_file.mp4").then((value) => _isRecording = true);
   }
 }
