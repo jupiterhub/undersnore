@@ -3,7 +3,8 @@ import 'package:undersnore/player/player_interface.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class AudioPlayer extends StatefulWidget {
-  const AudioPlayer({Key? key, required this.audioPlayer,  required this.title}) : super(key: key);
+  const AudioPlayer({Key? key, required this.audioPlayer, required this.title})
+      : super(key: key);
 
   final UndersnorePlayer audioPlayer;
   final String title;
@@ -19,9 +20,7 @@ class _AudioPlayerState extends State<AudioPlayer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-       title: Text(widget.title)
-      ),
+      appBar: AppBar(title: Text(widget.title)),
       body: Center(
         child: Column(
           children: [
@@ -42,8 +41,15 @@ class _AudioPlayerState extends State<AudioPlayer> {
 
   @override
   void initState() {
+    print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ STARTING INIT STATE');
     super.initState();
-    widget.audioPlayer.initialize().then((value) => _playerInitialized = true);
+    widget.audioPlayer.initialize().then((value) {
+      print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ INITIALIZED STATE');
+
+      setState(() {
+        _playerInitialized = true;
+      });
+    });
   }
 
   @override
@@ -52,7 +58,9 @@ class _AudioPlayerState extends State<AudioPlayer> {
     super.dispose();
   }
 
-  void _record() async{
-    await widget.audioPlayer.record("sample_file.mp4").then((value) => _isRecording = true);
+  void _record() async {
+    await widget.audioPlayer
+        .record("sample_file.mp4")
+        .then((value) => _isRecording = true);
   }
 }

@@ -9,8 +9,11 @@ class AudioPlayerFlutterSound implements UndersnorePlayer {
 
   @override
   Future initialize() async {
+    print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ INITIALIZING AUDIO SESSION');
     await _flutterSoundPlayer!.openAudioSession();
+    print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ OPENING RECORDER');
     await openTheRecorder();
+    print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ RECORDER OPEN');
     return Future<void>.value();
   }
 
