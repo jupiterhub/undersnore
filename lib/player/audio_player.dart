@@ -26,6 +26,7 @@ class _AudioPlayerState extends State<AudioPlayer> {
           children: [
             const Text("Press button to record"),
             Text('Player initialized? $_playerInitialized'),
+            Text('Recording started initialized? $_isRecording'),
           ],
         ),
       ),
@@ -33,8 +34,8 @@ class _AudioPlayerState extends State<AudioPlayer> {
         onPressed: _record,
         tooltip: 'Record',
         child: _isRecording
-            ? const Icon(Icons.record_voice_over)
-            : const Icon(Icons.stop),
+            ? const Icon(Icons.stop)
+            : const Icon(Icons.mic),
       ),
     );
   }
@@ -59,8 +60,11 @@ class _AudioPlayerState extends State<AudioPlayer> {
   }
 
   void _record() async {
-    await widget.audioPlayer
-        .record("sample_file.mp4")
-        .then((value) => _isRecording = true);
+    await widget.audioPlayer.record("sample_file.mp4").then((value) => {
+          setState(() {
+            print("----- START RECORDING ---");
+            _isRecording = true;
+          })
+        });
   }
 }
